@@ -1,0 +1,60 @@
+#include <stdio.h> 
+#include <stdlib.h>
+
+void change_str(int size, double matrix[size][size], int first_str, int second_str){
+    for(int i = 0; i< size; i++){
+       double temp = matrix[first_str][i];
+       matrix[first_str][i] = matrix[second_str][i];
+       matrix[second_str][i] = temp;
+    }
+    return;
+}
+
+void multiply_str_by_number(int size, double matrix[size][size], double num, int num_string){
+    for(int i = 0; i <size; i++ ){
+        matrix[num_string][i]= matrix[num_string][i] * num;
+    }
+    return;
+}
+void multiply_str_by_number_plus_another_str(int size, double matrix[size][size], double num, int num_counting_str, int num_add_str ){
+    multiply_str_by_number(size, matrix, num, num_add_str);
+    for(int i = 0; i <size; i++ ){
+        matrix[num_counting_str][i]=matrix[num_counting_str][i] + matrix[num_add_str][i];}
+    return;
+}
+double Gaussian_method(int size, double matrix[size][size]){
+    for(int i = 0; i < size; i++){
+        if(matrix[i][i]==0){
+            while(matrix[i][i]==0){
+                int k = 1;
+                change_str(size, matrix, 0, k );
+                k++;
+            }
+        }
+        int a = matrix[i][i];
+        
+        for(int l = 1; l< size; l++){
+            int point = (-1)*(matrix[l][i]*(a**(-1)));
+            multiply_str_by_number_plus_another_str(size, matrix, point, l, i );
+        }
+        
+    }
+return;
+}
+int main(){
+int sizemat;
+scanf("%d", &sizemat);
+double matrix[sizemat][sizemat];
+for(int i = 0; i < sizemat; i++){
+    for(int k = 0; k < sizemat; k++){
+        scanf("%lf", &matrix[i][k]);
+    }
+}
+Gaussian_method(sizemat, matrix);
+
+
+
+
+
+return 0;
+}
