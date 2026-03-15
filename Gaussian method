@@ -62,10 +62,5 @@ for(int i = 0; i < sizemat; i++){
     }
 }
 printf("%lf", Gaussian_method(sizemat, matrix));
-
-
-
-
-
 return 0;
 }
